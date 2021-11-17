@@ -13,42 +13,49 @@ namespace MailClient
         public SmtpClient smtp;
         public MemoryStream streamLogger;
         private MailKit.ProtocolLogger logger;
-        private int StreamPositionStart = 0;
+        private long StreamPositionStart = 0;
         private string server;
         private int port;
         private string login;
         private string password;
-        MimeMessage msg;
+        
 
         public clientSMTP() 
         {
-            msg = new MimeMessage();
             initLoggerAndClient();
         }
 
         public clientSMTP(string server, int port, string login, string password)
         {
             initLoggerAndClient();
-            msg = new MimeMessage();
+            this.server = server;
+            this.port = port;
+            this.login = login;
+            this.password = password;
+        }
+        private void initLoggerAndClient()
+        {
+            streamLogger = new MemoryStream(); // Поток для записи в него лога
+            logger = new MailKit.ProtocolLogger(streamLogger, true); // Создали логгер и связали с потоком
+            logger.Stream.Position = 0;
+            this.smtp = new SmtpClient(logger); // создали объект клиента с логированием
+        }
 
-            msg.From.Add(new MailboxAddress("", login));
-            msg.To.Add(new MailboxAddress("", login));
-            msg.Subject = "проверка";
-            msg.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-
-            //emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
+        public void SendMessage(string userFrom, string userTo, string subject, string body, bool TextFormatHtml = true)
+        {
+            try
             {
-                Text = "ffffffffffffffff"
-            };
-
-            
-            try { smtp.Connect(server, port, MailKit.Security.SecureSocketOptions.Auto); } catch (Exception e) { throw new Exception(e.Message); }
-            try { smtp.Authenticate(login, password); } catch (Exception e) { throw new Exception(""); }
-
-            smtp.Send(msg);
-            string log = getLogAll();
-            this.Disconnect();
-            
+                MimeMessage msg = new MimeMessage();
+                msg.From.Add(new MailboxAddress("", userFrom));
+                msg.To.Add(new MailboxAddress("", userTo));
+                msg.Subject = subject;
+                if (TextFormatHtml)
+                    msg.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+                else
+                    msg.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = body };
+                smtp.Send(msg);
+            }
+            catch (Exception err) { throw new Exception(err.Message); }
         }
 
         public void ConnectToServerAndAuthenticate()
@@ -61,22 +68,24 @@ namespace MailClient
             catch (Exception err) {throw new Exception(err.Message); }
         }
 
-        private void initLoggerAndClient()
-        {
-            streamLogger = new MemoryStream();
-            logger = new MailKit.ProtocolLogger(streamLogger, true);
-            logger.Stream.Position = 0;
-            this.smtp = new SmtpClient(logger);
-        }
-
         public string getLogAll()
         {
             int offset = 0; // смещение от начального положения
+            StreamPositionStart = logger.Stream.Position;
             logger.Stream.Position = 0;
             byte[] bytes = new byte[streamLogger.Length];
             streamLogger.Read(bytes, offset, int.Parse(streamLogger.Length.ToString()) - offset);
+            logger.Stream.Position = StreamPositionStart;
             string strLog = Encoding.UTF8.GetString(bytes);
             return strLog;
+        }
+
+        public string getLogAllAndReadInFile()
+        {
+            string log = getLogAll();
+            string path = "MailLog_" + DateTime.Now.ToString();
+            File.WriteAllText(path, log, Encoding.UTF8);
+            return log;
         }
 
         public bool checkConnectedAndAuthenticated()

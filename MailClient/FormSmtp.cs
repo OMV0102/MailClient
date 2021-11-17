@@ -22,13 +22,13 @@ namespace MailClient
         // при загрузке формы
         private void FormSmtp_Load(object sender, EventArgs e)
         {
-            client
+            //client
         }
 
         // кнопка СОЕДИНЕНИЕ
         private void btnEntry_Click(object sender, EventArgs e)
         {
-            client
+            //client
         }
 
         private void btnSend_Click(object sender, EventArgs e)
