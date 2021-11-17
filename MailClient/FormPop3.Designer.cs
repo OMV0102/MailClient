@@ -1,7 +1,7 @@
 ﻿
 namespace MailClient
 {
-    partial class FormSmtp
+    partial class FormPop3
     {
         /// <summary>
         /// Required designer variable.
@@ -40,20 +40,12 @@ namespace MailClient
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnConnectionOpen = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtBody = new System.Windows.Forms.RichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtFrom = new System.Windows.Forms.TextBox();
-            this.groupBoxSend = new System.Windows.Forms.GroupBox();
-            this.btnSend = new System.Windows.Forms.Button();
-            this.txtSubject = new System.Windows.Forms.TextBox();
-            this.txtTo = new System.Windows.Forms.TextBox();
+            this.groupBoxGetMessage = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.btnRefreshList = new System.Windows.Forms.Button();
             this.groupBoxConnect.SuspendLayout();
-            this.groupBoxSend.SuspendLayout();
+            this.groupBoxGetMessage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +91,7 @@ namespace MailClient
             this.txtPortSmtp.Size = new System.Drawing.Size(70, 29);
             this.txtPortSmtp.TabIndex = 20;
             this.txtPortSmtp.TabStop = false;
-            this.txtPortSmtp.Text = "587";
+            this.txtPortSmtp.Text = "995/110";
             // 
             // labelPass
             // 
@@ -180,113 +172,17 @@ namespace MailClient
             this.label3.TabIndex = 21;
             this.label3.Text = ":";
             // 
-            // txtBody
+            // groupBoxGetMessage
             // 
-            this.txtBody.Location = new System.Drawing.Point(11, 157);
-            this.txtBody.Name = "txtBody";
-            this.txtBody.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txtBody.Size = new System.Drawing.Size(426, 131);
-            this.txtBody.TabIndex = 23;
-            this.txtBody.TabStop = false;
-            this.txtBody.Text = "Проверка это тело письма";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 67);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 20);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Кому";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 31);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 20);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "От";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 102);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 20);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Тема";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 134);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(303, 20);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Текст письма (поддерживается HTML)";
-            // 
-            // txtFrom
-            // 
-            this.txtFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtFrom.Location = new System.Drawing.Point(63, 25);
-            this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(339, 29);
-            this.txtFrom.TabIndex = 22;
-            this.txtFrom.TabStop = false;
-            // 
-            // groupBoxSend
-            // 
-            this.groupBoxSend.Controls.Add(this.btnSend);
-            this.groupBoxSend.Controls.Add(this.txtSubject);
-            this.groupBoxSend.Controls.Add(this.txtBody);
-            this.groupBoxSend.Controls.Add(this.txtTo);
-            this.groupBoxSend.Controls.Add(this.label7);
-            this.groupBoxSend.Controls.Add(this.txtFrom);
-            this.groupBoxSend.Controls.Add(this.label4);
-            this.groupBoxSend.Controls.Add(this.label5);
-            this.groupBoxSend.Controls.Add(this.label6);
-            this.groupBoxSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBoxSend.ForeColor = System.Drawing.Color.Black;
-            this.groupBoxSend.Location = new System.Drawing.Point(12, 242);
-            this.groupBoxSend.Name = "groupBoxSend";
-            this.groupBoxSend.Size = new System.Drawing.Size(445, 331);
-            this.groupBoxSend.TabIndex = 22;
-            this.groupBoxSend.TabStop = false;
-            this.groupBoxSend.Text = "Отправка письма";
-            // 
-            // btnSend
-            // 
-            this.btnSend.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSend.Location = new System.Drawing.Point(218, 294);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(219, 29);
-            this.btnSend.TabIndex = 22;
-            this.btnSend.TabStop = false;
-            this.btnSend.Text = "Отправить";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // txtSubject
-            // 
-            this.txtSubject.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSubject.Location = new System.Drawing.Point(63, 96);
-            this.txtSubject.Name = "txtSubject";
-            this.txtSubject.Size = new System.Drawing.Size(339, 29);
-            this.txtSubject.TabIndex = 27;
-            this.txtSubject.TabStop = false;
-            this.txtSubject.Text = "ТУТ ТЕМА";
-            // 
-            // txtTo
-            // 
-            this.txtTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTo.Location = new System.Drawing.Point(63, 61);
-            this.txtTo.Name = "txtTo";
-            this.txtTo.Size = new System.Drawing.Size(339, 29);
-            this.txtTo.TabIndex = 26;
-            this.txtTo.TabStop = false;
-            this.txtTo.Text = "m.orlov@corp.nstu.ru";
+            this.groupBoxGetMessage.Controls.Add(this.btnRefreshList);
+            this.groupBoxGetMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBoxGetMessage.ForeColor = System.Drawing.Color.Black;
+            this.groupBoxGetMessage.Location = new System.Drawing.Point(12, 242);
+            this.groupBoxGetMessage.Name = "groupBoxGetMessage";
+            this.groupBoxGetMessage.Size = new System.Drawing.Size(445, 331);
+            this.groupBoxGetMessage.TabIndex = 22;
+            this.groupBoxGetMessage.TabStop = false;
+            this.groupBoxGetMessage.Text = "Входящие письма";
             // 
             // groupBox1
             // 
@@ -310,29 +206,41 @@ namespace MailClient
             this.txtLog.TabStop = false;
             this.txtLog.Text = "";
             // 
-            // FormSmtp
+            // btnRefreshList
+            // 
+            this.btnRefreshList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRefreshList.Location = new System.Drawing.Point(218, 294);
+            this.btnRefreshList.Name = "btnRefreshList";
+            this.btnRefreshList.Size = new System.Drawing.Size(219, 29);
+            this.btnRefreshList.TabIndex = 22;
+            this.btnRefreshList.TabStop = false;
+            this.btnRefreshList.Text = "Обновить";
+            this.btnRefreshList.UseVisualStyleBackColor = true;
+            this.btnRefreshList.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // FormPop3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(979, 583);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBoxSend);
+            this.Controls.Add(this.groupBoxGetMessage);
             this.Controls.Add(this.groupBoxConnect);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.Name = "FormSmtp";
+            this.Name = "FormPop3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Отправка писем по протоколу SMTP";
+            this.Text = "Получение писем по протоколу POP3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSmtp_FormClosing);
             this.Load += new System.EventHandler(this.FormSmtp_Load);
             this.groupBoxConnect.ResumeLayout(false);
             this.groupBoxConnect.PerformLayout();
-            this.groupBoxSend.ResumeLayout(false);
-            this.groupBoxSend.PerformLayout();
+            this.groupBoxGetMessage.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -350,18 +258,10 @@ namespace MailClient
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnConnectionOpen;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox txtBody;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtFrom;
-        private System.Windows.Forms.GroupBox groupBoxSend;
-        private System.Windows.Forms.TextBox txtSubject;
-        private System.Windows.Forms.TextBox txtTo;
-        private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.GroupBox groupBoxGetMessage;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.Button btnConnectionClose;
+        private System.Windows.Forms.Button btnRefreshList;
     }
 }
