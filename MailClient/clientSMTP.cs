@@ -10,8 +10,8 @@ namespace MailClient
 {
     public class clientSMTP
     {
-        public SmtpClient smtp;
-        public MemoryStream streamLogger;
+        private SmtpClient client;
+        private MemoryStream streamLogger;
         private MailKit.ProtocolLogger logger;
         private long StreamPositionStart = 0;
         private string server;
@@ -33,12 +33,13 @@ namespace MailClient
             this.login = login;
             this.password = password;
         }
+
         private void initLoggerAndClient()
         {
             streamLogger = new MemoryStream(); // Поток для записи в него лога
             logger = new MailKit.ProtocolLogger(streamLogger, true); // Создали логгер и связали с потоком
             logger.Stream.Position = 0;
-            this.smtp = new SmtpClient(logger); // создали объект клиента с логированием
+            this.client = new SmtpClient(logger); // создали объект клиента с логированием
         }
 
         public void SendMessage(string userFrom, string userTo, string subject, string body, bool TextFormatHtml = true)
@@ -53,7 +54,7 @@ namespace MailClient
                     msg.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
                 else
                     msg.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = body };
-                smtp.Send(msg);
+                client.Send(msg);
             }
             catch (Exception err) { throw new Exception(err.Message); }
         }
@@ -62,8 +63,8 @@ namespace MailClient
         {
             try
             {
-                smtp.Connect(server, port, MailKit.Security.SecureSocketOptions.Auto);
-                smtp.Authenticate(login, password);
+                client.Connect(server, port, MailKit.Security.SecureSocketOptions.Auto);
+                client.Authenticate(login, password);
             }
             catch (Exception err) {throw new Exception(err.Message); }
         }
@@ -80,22 +81,22 @@ namespace MailClient
             return strLog;
         }
 
-        public string getLogAllAndReadInFile()
+        public string getLogAllAndReadInFile(string path)
         {
+            if (path == "") path = "MailLog_" + DateTime.Now.ToString();
             string log = getLogAll();
-            string path = "MailLog_" + DateTime.Now.ToString();
             File.WriteAllText(path, log, Encoding.UTF8);
             return log;
         }
 
         public bool checkConnectedAndAuthenticated()
         {
-            return smtp.IsConnected && smtp.IsAuthenticated;
+            return client.IsConnected && client.IsAuthenticated;
         }
 
         public void Disconnect()
         {
-            try {smtp.Disconnect(true); } catch (Exception error) { throw new Exception(error.Message); }
+            try {client.Disconnect(true); } catch (Exception error) { throw new Exception(error.Message); }
         }
     }
 }

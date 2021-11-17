@@ -20,7 +20,7 @@ namespace MailClient
         // загрузка формы
         private void FormAuth_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         // войти
@@ -38,18 +38,17 @@ namespace MailClient
                     {
                         MessageBox.Show(error.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     }
-
                 }
                 else if (comboBoxProtocol.SelectedIndex == 1) // POP3
                 { 
-
                 }
                 else
                     MessageBox.Show("Выберите протокол!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             else
                 MessageBox.Show("Заполните все поля!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         
-        */}
+        */
+        }
 
     }
 }
