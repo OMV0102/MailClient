@@ -16,7 +16,8 @@ namespace MailClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAuth());
+            //Application.Run(new FormAuth());
+            Application.Run(new FormPop3());
         }
     }
 }
