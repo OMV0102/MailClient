@@ -41,9 +41,10 @@ namespace MailClient
             this.btnConnectionOpen = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBoxGetMessage = new System.Windows.Forms.GroupBox();
+            this.btnRefreshList = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtLog = new System.Windows.Forms.RichTextBox();
-            this.btnRefreshList = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.groupBoxConnect.SuspendLayout();
             this.groupBoxGetMessage.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -174,6 +175,7 @@ namespace MailClient
             // 
             // groupBoxGetMessage
             // 
+            this.groupBoxGetMessage.Controls.Add(this.webBrowser1);
             this.groupBoxGetMessage.Controls.Add(this.btnRefreshList);
             this.groupBoxGetMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBoxGetMessage.ForeColor = System.Drawing.Color.Black;
@@ -183,6 +185,19 @@ namespace MailClient
             this.groupBoxGetMessage.TabIndex = 22;
             this.groupBoxGetMessage.TabStop = false;
             this.groupBoxGetMessage.Text = "Входящие письма";
+            // 
+            // btnRefreshList
+            // 
+            this.btnRefreshList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRefreshList.Location = new System.Drawing.Point(218, 294);
+            this.btnRefreshList.Name = "btnRefreshList";
+            this.btnRefreshList.Size = new System.Drawing.Size(219, 29);
+            this.btnRefreshList.TabIndex = 22;
+            this.btnRefreshList.TabStop = false;
+            this.btnRefreshList.Text = "Обновить";
+            this.btnRefreshList.UseVisualStyleBackColor = true;
+            this.btnRefreshList.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // groupBox1
             // 
@@ -206,18 +221,14 @@ namespace MailClient
             this.txtLog.TabStop = false;
             this.txtLog.Text = "";
             // 
-            // btnRefreshList
+            // webBrowser1
             // 
-            this.btnRefreshList.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRefreshList.Location = new System.Drawing.Point(218, 294);
-            this.btnRefreshList.Name = "btnRefreshList";
-            this.btnRefreshList.Size = new System.Drawing.Size(219, 29);
-            this.btnRefreshList.TabIndex = 22;
-            this.btnRefreshList.TabStop = false;
-            this.btnRefreshList.Text = "Обновить";
-            this.btnRefreshList.UseVisualStyleBackColor = true;
-            this.btnRefreshList.Click += new System.EventHandler(this.btnSend_Click);
+            this.webBrowser1.Location = new System.Drawing.Point(16, 123);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(304, 150);
+            this.webBrowser1.TabIndex = 23;
+            this.webBrowser1.TabStop = false;
             // 
             // FormPop3
             // 
@@ -263,5 +274,6 @@ namespace MailClient
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.Button btnConnectionClose;
         private System.Windows.Forms.Button btnRefreshList;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
