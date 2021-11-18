@@ -41,13 +41,15 @@ namespace MailClient
             this.btnConnectionOpen = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBoxGetMessage = new System.Windows.Forms.GroupBox();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnRefreshList = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtLog = new System.Windows.Forms.RichTextBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBoxConnect.SuspendLayout();
             this.groupBoxGetMessage.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxConnect
@@ -175,6 +177,7 @@ namespace MailClient
             // 
             // groupBoxGetMessage
             // 
+            this.groupBoxGetMessage.Controls.Add(this.dataGridView1);
             this.groupBoxGetMessage.Controls.Add(this.webBrowser1);
             this.groupBoxGetMessage.Controls.Add(this.btnRefreshList);
             this.groupBoxGetMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -185,6 +188,18 @@ namespace MailClient
             this.groupBoxGetMessage.TabIndex = 22;
             this.groupBoxGetMessage.TabStop = false;
             this.groupBoxGetMessage.Text = "Входящие письма";
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.AllowWebBrowserDrop = false;
+            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser1.Location = new System.Drawing.Point(16, 139);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(394, 134);
+            this.webBrowser1.TabIndex = 23;
+            this.webBrowser1.TabStop = false;
             // 
             // btnRefreshList
             // 
@@ -221,14 +236,27 @@ namespace MailClient
             this.txtLog.TabStop = false;
             this.txtLog.Text = "";
             // 
-            // webBrowser1
+            // dataGridView1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(16, 123);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(304, 150);
-            this.webBrowser1.TabIndex = 23;
-            this.webBrowser1.TabStop = false;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 25);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
+            this.dataGridView1.Size = new System.Drawing.Size(430, 108);
+            this.dataGridView1.TabIndex = 24;
+            this.dataGridView1.TabStop = false;
+            this.dataGridView1.VirtualMode = true;
             // 
             // FormPop3
             // 
@@ -253,6 +281,7 @@ namespace MailClient
             this.groupBoxConnect.PerformLayout();
             this.groupBoxGetMessage.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -275,5 +304,6 @@ namespace MailClient
         private System.Windows.Forms.Button btnConnectionClose;
         private System.Windows.Forms.Button btnRefreshList;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
