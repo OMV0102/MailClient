@@ -17,11 +17,11 @@ namespace MailClient
             InitializeComponent();
         }
 
-        private clientSMTP pop3;
+        private clientPOP3 pop3;
         DataTable table;
 
         // при загрузке формы
-        private void FormSmtp_Load(object sender, EventArgs e)
+        private void FormPop3_Load(object sender, EventArgs e)
         {
             OnEditParameteresConnection(true);
         }
@@ -34,12 +34,13 @@ namespace MailClient
             {
                 try
                 {
-                    pop3 = new clientSMTP(txtServer.Text, port, txtLogin.Text, txtPassword.Text);
+                    pop3 = new clientPOP3(txtServer.Text, port, txtLogin.Text, txtPassword.Text);
+                    this.Cursor = Cursors.WaitCursor;
                     pop3.ConnectToServerAndAuthenticate();
                     if (pop3.checkConnectedAndAuthenticated())
                     {
-                        txtFrom.Text = txtLogin.Text;
                         OnEditParameteresConnection(false);
+                        initDataTable();
                     }
                     else throw new Exception("Не удалось установить соединение!");
                     txtLog.Text = pop3.getLogAll();
@@ -48,66 +49,56 @@ namespace MailClient
                 {
                     MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
+                finally
+                {
+                    this.Cursor = Cursors.Arrow;
+                }
             }
             else
                 MessageBox.Show("Заполните все поля для установление соединения!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
         }
+        private void btnRefreshList_Click(object sender, EventArgs e)
+        {
+            if (pop3.listMessage != null && pop3.listMessage.Count > 0)
+            {
 
-        // обновить список сообщений
-        private void RefreshListMessage()
+
+
+                table.Rows.Clear();
+
+                for (int j = 0; j < 10; j++) // ЗАПОЛНЕНИЕ СООБЩЕНИЯМИ
+                {
+                    DataRow dr = table.NewRow();
+                    dr[0] = pop3.listMessage[j].MessageId;
+                    dr[1] = pop3.listMessage[j].From[0];
+                    dr[3] = pop3.listMessage[j].Subject;
+                    dr[4] = pop3.listMessage[j].TextBody;
+                    table.Rows.Add(dr);
+                }
+
+                setCongigOfRowTable(0);
+                setCongigOfRowTable(1);
+                setCongigOfRowTable(2);
+                setCongigOfRowTable(3);
+            }
+        }
+        
+        // инициализация таблицы сообщений
+        private void initDataTable()
         {
             table = new DataTable("Messages");
             table.Clear();
             table.Columns.Clear();
-            table.Rows.Clear();
 
             table.Columns.Add(new DataColumn("№"));
             table.Columns.Add(new DataColumn("From"));
             table.Columns.Add(new DataColumn("Subject"));
             table.Columns.Add(new DataColumn("Body"));
 
-            for (int j = 0; j < 10; j++) // ЗАПОЛНЕНИЕ СООБЩЕНИЯМИ
-            {
-                DataRow dr = table.NewRow();
-                dr[0] = null;
-                dr[1] = null;
-                dr[3] = null;
-                dr[4] = null;
-                table.Rows.Add(dr);
-            }
-
             dataGridView1.Columns[0].Width = 20;
             dataGridView1.Columns[1].Width = 100;
             dataGridView1.Columns[2].Width = 130;
             dataGridView1.Columns[3].Width = 230;
-            setCongigOfRowTable(0);
-            setCongigOfRowTable(1);
-            setCongigOfRowTable(2);
-            setCongigOfRowTable(3);
-
-            dataGridView1.DataSource = table;
-        }
-
-        // кнопка Отправить
-        private void btnSend_Click(object sender, EventArgs e)
-        {
-            if (txtTo.TextLength > 0 && txtSubject.TextLength > 0 && txtBody.TextLength > 0/* && txtFrom.TextLength > 0*/)
-            {
-                if (pop3.checkConnectedAndAuthenticated())
-                {
-                    try
-                    {
-                        pop3.SendMessage(txtFrom.Text, txtTo.Text, txtSubject.Text, txtBody.Text);
-                        txtLog.Text = pop3.getLogAll();
-                        MessageBox.Show("Письмо успешно отправлено.", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                    }
-                    catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
-                }
-                else
-                    MessageBox.Show("Соединение не было установлено.\nУстановите соединение.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-            }
-            else
-                MessageBox.Show("Заполните все поля письма!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         }
 
         private void OnEditParameteresConnection(bool flag)
@@ -118,7 +109,7 @@ namespace MailClient
             txtPassword.Enabled = flag;
             btnConnectionOpen.Visible = flag;
             btnConnectionClose.Visible = !flag;
-            groupBoxGetMessage.Enabled = flag;
+            groupBoxGetMessage.Enabled = !flag;
         }
 
         // кнопка Закрыть соединение
@@ -139,7 +130,7 @@ namespace MailClient
         }
 
         // перед закрытием формы
-        private void FormSmtp_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormPop3_FormClosing(object sender, FormClosingEventArgs e)
         {
             btnConnectionClose_Click(null, null);
         }
@@ -160,6 +151,7 @@ namespace MailClient
             table.Columns[i].ReadOnly = true;
             dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
+
     }
 }
 

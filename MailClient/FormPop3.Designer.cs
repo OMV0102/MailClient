@@ -41,15 +41,15 @@ namespace MailClient
             this.btnConnectionOpen = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBoxGetMessage = new System.Windows.Forms.GroupBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnRefreshList = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtLog = new System.Windows.Forms.RichTextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBoxConnect.SuspendLayout();
             this.groupBoxGetMessage.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxConnect
@@ -94,7 +94,7 @@ namespace MailClient
             this.txtPortSmtp.Size = new System.Drawing.Size(70, 29);
             this.txtPortSmtp.TabIndex = 20;
             this.txtPortSmtp.TabStop = false;
-            this.txtPortSmtp.Text = "995/110";
+            this.txtPortSmtp.Text = "995";
             // 
             // labelPass
             // 
@@ -113,6 +113,7 @@ namespace MailClient
             this.txtLogin.Size = new System.Drawing.Size(355, 29);
             this.txtLogin.TabIndex = 18;
             this.txtLogin.TabStop = false;
+            this.txtLogin.Text = "mishkansk98@mail.ru";
             // 
             // label2
             // 
@@ -140,7 +141,7 @@ namespace MailClient
             this.txtServer.Size = new System.Drawing.Size(213, 29);
             this.txtServer.TabIndex = 15;
             this.txtServer.TabStop = false;
-            this.txtServer.Text = "mail2.nstu.ru";
+            this.txtServer.Text = "pop.mail.ru";
             // 
             // txtPassword
             // 
@@ -150,6 +151,7 @@ namespace MailClient
             this.txtPassword.Size = new System.Drawing.Size(355, 31);
             this.txtPassword.TabIndex = 14;
             this.txtPassword.TabStop = false;
+            this.txtPassword.Text = "zauce7EhBnd5YgSK4d9b";
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // btnConnectionOpen
@@ -178,8 +180,8 @@ namespace MailClient
             // groupBoxGetMessage
             // 
             this.groupBoxGetMessage.Controls.Add(this.dataGridView1);
-            this.groupBoxGetMessage.Controls.Add(this.webBrowser1);
             this.groupBoxGetMessage.Controls.Add(this.btnRefreshList);
+            this.groupBoxGetMessage.Controls.Add(this.webBrowser1);
             this.groupBoxGetMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBoxGetMessage.ForeColor = System.Drawing.Color.Black;
             this.groupBoxGetMessage.Location = new System.Drawing.Point(12, 242);
@@ -188,53 +190,6 @@ namespace MailClient
             this.groupBoxGetMessage.TabIndex = 22;
             this.groupBoxGetMessage.TabStop = false;
             this.groupBoxGetMessage.Text = "Входящие письма";
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.AllowNavigation = false;
-            this.webBrowser1.AllowWebBrowserDrop = false;
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser1.Location = new System.Drawing.Point(16, 139);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(394, 134);
-            this.webBrowser1.TabIndex = 23;
-            this.webBrowser1.TabStop = false;
-            // 
-            // btnRefreshList
-            // 
-            this.btnRefreshList.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRefreshList.Location = new System.Drawing.Point(218, 294);
-            this.btnRefreshList.Name = "btnRefreshList";
-            this.btnRefreshList.Size = new System.Drawing.Size(219, 29);
-            this.btnRefreshList.TabIndex = 22;
-            this.btnRefreshList.TabStop = false;
-            this.btnRefreshList.Text = "Обновить";
-            this.btnRefreshList.UseVisualStyleBackColor = true;
-            this.btnRefreshList.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtLog);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(463, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(504, 561);
-            this.groupBox1.TabIndex = 28;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Отображение лога";
-            // 
-            // txtLog
-            // 
-            this.txtLog.Location = new System.Drawing.Point(6, 22);
-            this.txtLog.Name = "txtLog";
-            this.txtLog.ReadOnly = true;
-            this.txtLog.Size = new System.Drawing.Size(492, 531);
-            this.txtLog.TabIndex = 28;
-            this.txtLog.TabStop = false;
-            this.txtLog.Text = "";
             // 
             // dataGridView1
             // 
@@ -258,6 +213,53 @@ namespace MailClient
             this.dataGridView1.TabStop = false;
             this.dataGridView1.VirtualMode = true;
             // 
+            // btnRefreshList
+            // 
+            this.btnRefreshList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRefreshList.Location = new System.Drawing.Point(323, 139);
+            this.btnRefreshList.Name = "btnRefreshList";
+            this.btnRefreshList.Size = new System.Drawing.Size(113, 29);
+            this.btnRefreshList.TabIndex = 22;
+            this.btnRefreshList.TabStop = false;
+            this.btnRefreshList.Text = "Обновить";
+            this.btnRefreshList.UseVisualStyleBackColor = true;
+            this.btnRefreshList.Click += new System.EventHandler(this.btnRefreshList_Click);
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.AllowWebBrowserDrop = false;
+            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser1.Location = new System.Drawing.Point(6, 189);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(430, 134);
+            this.webBrowser1.TabIndex = 23;
+            this.webBrowser1.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtLog);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.ForeColor = System.Drawing.Color.Black;
+            this.groupBox1.Location = new System.Drawing.Point(463, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(504, 561);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Отображение лога";
+            // 
+            // txtLog
+            // 
+            this.txtLog.Location = new System.Drawing.Point(6, 22);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
+            this.txtLog.Size = new System.Drawing.Size(492, 531);
+            this.txtLog.TabIndex = 28;
+            this.txtLog.TabStop = false;
+            this.txtLog.Text = "";
+            // 
             // FormPop3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -275,13 +277,13 @@ namespace MailClient
             this.Name = "FormPop3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Получение писем по протоколу POP3";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSmtp_FormClosing);
-            this.Load += new System.EventHandler(this.FormSmtp_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPop3_FormClosing);
+            this.Load += new System.EventHandler(this.FormPop3_Load);
             this.groupBoxConnect.ResumeLayout(false);
             this.groupBoxConnect.PerformLayout();
             this.groupBoxGetMessage.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

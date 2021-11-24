@@ -11,9 +11,11 @@ namespace MailClient
     public class clientSMTP
     {
         private SmtpClient client;
+
         private MemoryStream streamLogger;
         private MailKit.ProtocolLogger logger;
         private long StreamPositionStart = 0;
+
         private string server;
         private int port;
         private string login;

@@ -11,15 +11,18 @@ namespace MailClient
 {
     public class clientPOP3
     {
-        private Pop3Client client;
+        public Pop3Client client;
+
         private MemoryStream streamLogger;
         private MailKit.ProtocolLogger logger;
         private long StreamPositionStart = 0;
+        
         private string server;
         private int port;
         private string login;
         private string password;
 
+        public List<MimeMessage> listMessage;
 
         public clientPOP3()
         {
@@ -43,19 +46,11 @@ namespace MailClient
             this.client = new Pop3Client(logger); // создали объект клиента с логированием
         }
 
-        public void SendMessage(string userFrom, string userTo, string subject, string body, bool TextFormatHtml = true)
+        public void GetMessages()
         {
             try
             {
-                MimeMessage msg = new MimeMessage();
-                msg.From.Add(new MailboxAddress("", userFrom));
-                msg.To.Add(new MailboxAddress("", userTo));
-                msg.Subject = subject;
-                if (TextFormatHtml)
-                    msg.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
-                else
-                    msg.Body = new TextPart(MimeKit.Text.TextFormat.Plain) { Text = body };
-                client.Send(msg);
+                listMessage = new List<MimeMessage>(client.GetMessages(0, client.GetMessageCount(), default, null));
             }
             catch (Exception err) { throw new Exception(err.Message); }
         }
