@@ -85,7 +85,7 @@ namespace MailClient
 
         public string getLogAllAndReadInFile(string path)
         {
-            if (path == "") path = "MailLog_" + DateTime.Now.ToString();
+            if (path == "") path = Environment.SpecialFolder.DesktopDirectory + "MailLog_" + DateTime.Now.ToString();
             string log = getLogAll();
             File.WriteAllText(path, log, Encoding.UTF8);
             return log;

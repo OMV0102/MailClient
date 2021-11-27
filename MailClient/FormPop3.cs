@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace MailClient
                     {
                         OnEditParameteresConnection(false);
                         initDataTable();
+                        btnRefreshList_Click(null, null);
                     }
                     else throw new Exception("Не удалось установить соединение!");
                     txtLog.Text = pop3.getLogAll();
@@ -59,28 +61,32 @@ namespace MailClient
         }
         private void btnRefreshList_Click(object sender, EventArgs e)
         {
-            if (pop3.listMessage != null && pop3.listMessage.Count > 0)
+            try
             {
-
-
-
-                table.Rows.Clear();
-
-                for (int j = 0; j < 10; j++) // ЗАПОЛНЕНИЕ СООБЩЕНИЯМИ
+                pop3.GetMessages(10);
+                if (pop3.listMessage != null && pop3.listMessage.Count > 0)
                 {
-                    DataRow dr = table.NewRow();
-                    dr[0] = pop3.listMessage[j].MessageId;
-                    dr[1] = pop3.listMessage[j].From[0];
-                    dr[3] = pop3.listMessage[j].Subject;
-                    dr[4] = pop3.listMessage[j].TextBody;
-                    table.Rows.Add(dr);
-                }
+                    int N = pop3.listMessage.Count;
+                    table.Rows.Clear();
 
-                setCongigOfRowTable(0);
-                setCongigOfRowTable(1);
-                setCongigOfRowTable(2);
-                setCongigOfRowTable(3);
+                    for (int j = 0; j < N; j++) // ЗАПОЛНЕНИЕ СООБЩЕНИЯМИ
+                    {
+                        DataRow dr = table.NewRow();
+                        //dr[0] = pop3.listMessage[j].MessageId;
+                        dr[0] = j;
+                        dr[1] = pop3.listMessage[j].Date.ToString("d");
+                        dr[2] = pop3.listMessage[j].From.ToString();
+                        dr[3] = pop3.listMessage[j].Subject;
+                        //dr[3] = pop3.listMessage[j].HtmlBody;
+                        table.Rows.Add(dr);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Входящих писем нет!", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                }
             }
+            catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
         }
         
         // инициализация таблицы сообщений
@@ -89,16 +95,32 @@ namespace MailClient
             table = new DataTable("Messages");
             table.Clear();
             table.Columns.Clear();
+            table.Rows.Clear();
+            dataGridView1.ClearSelection();
+            //dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+
 
             table.Columns.Add(new DataColumn("№"));
+            table.Columns.Add(new DataColumn("Date"));
             table.Columns.Add(new DataColumn("From"));
             table.Columns.Add(new DataColumn("Subject"));
-            table.Columns.Add(new DataColumn("Body"));
+            //table.Columns.Add(new DataColumn("Body"));
+            dataGridView1.DataSource = table;
+            setSizeForDataGrid(0);
+            setSizeForDataGrid(1);
+            setSizeForDataGrid(2);
+            setSizeForDataGrid(3);
+        }
 
-            dataGridView1.Columns[0].Width = 20;
-            dataGridView1.Columns[1].Width = 100;
-            dataGridView1.Columns[2].Width = 130;
-            dataGridView1.Columns[3].Width = 230;
+        private void setSizeForDataGrid(int i)
+        {
+            dataGridView1.Columns[i].ReadOnly = true;
+            dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns[0].Width = 40;
+            dataGridView1.Columns[1].Width = 90;
+            dataGridView1.Columns[2].Width = 250;
+            dataGridView1.Columns[3].Width = 300;
         }
 
         private void OnEditParameteresConnection(bool flag)
@@ -119,6 +141,13 @@ namespace MailClient
             {
                 try
                 {
+                    table.Clear();
+                    table.Columns.Clear();
+                    table.Rows.Clear();
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Columns.Clear();
+                    //dataGridView1.Rows.Clear();
+                    SetHtmlDocumentInWebBrowser("<!doctype html><HTML></HTML>");
                     pop3.Disconnect();
                 }
                 catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
@@ -138,20 +167,31 @@ namespace MailClient
         // вывод html в webBrowser
         private void SetHtmlDocumentInWebBrowser(string textHtml)
         {
-            webBrowser1.Navigate("about:blank");
-            if (webBrowser1.Document != null)
-            {
-                webBrowser1.Document.Write(string.Empty);
-            }
-            webBrowser1.DocumentText = textHtml;
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\temp.html";
+            File.WriteAllText(path, textHtml, Encoding.UTF8);
+            String uriString = String.Format("file:///{0}", path)/*.Replace("\\", "/")*/;
+            webBrowser1.Navigate(new Uri(uriString));
+            webBrowser1.Refresh();
         }
 
-        private void setCongigOfRowTable(int i)
+
+        // выбор письма из списка
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            table.Columns[i].ReadOnly = true;
-            dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            string htmlText = pop3.listMessage[dataGridView1.CurrentRow != null ? dataGridView1.CurrentRow.Index : 0].HtmlBody;
+            SetHtmlDocumentInWebBrowser(htmlText);
         }
 
+        // удалить письмо
+        private void btnDeleteMessage_Click(object sender, EventArgs e)
+        {
+            int index = dataGridView1.CurrentRow != null ? dataGridView1.CurrentRow.Index : -1;
+            if(index != -1)
+            {
+                pop3.DeleteMessage(index);
+                btnRefreshList_Click(null, null);
+            }
+        }
     }
 }
 

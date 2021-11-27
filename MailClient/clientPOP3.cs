@@ -46,13 +46,27 @@ namespace MailClient
             this.client = new Pop3Client(logger); // создали объект клиента с логированием
         }
 
-        public void GetMessages()
+        public List<MimeMessage> GetMessages(int countRequested = 10)
         {
+            if (client.GetMessageCount() < countRequested) countRequested = client.GetMessageCount();
+            listMessage = new List<MimeMessage>();
+            MimeMessage msg;
             try
             {
-                listMessage = new List<MimeMessage>(client.GetMessages(0, client.GetMessageCount(), default, null));
+                for (int i = client.GetMessageCount() - 1, j = 0; i > 0 && j < countRequested; i--, j++)
+                {
+                    msg = client.GetMessage(i);
+                    listMessage.Add(msg);
+                }
             }
             catch (Exception err) { throw new Exception(err.Message); }
+
+            return listMessage;
+        }
+
+        public void DeleteMessage(int index)
+        {
+            client.DeleteMessage((client.GetMessageCount()-1) - index);
         }
 
         public void ConnectToServerAndAuthenticate()
