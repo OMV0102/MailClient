@@ -73,7 +73,7 @@ namespace MailClient
             this.groupBoxConnect.Size = new System.Drawing.Size(445, 224);
             this.groupBoxConnect.TabIndex = 0;
             this.groupBoxConnect.TabStop = false;
-            this.groupBoxConnect.Text = "Соединение";
+            this.groupBoxConnect.Text = "Соединение по протоколу POP3";
             // 
             // btnConnectionClose
             // 
