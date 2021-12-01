@@ -118,6 +118,7 @@ namespace MailClient
             this.txtLogin.Size = new System.Drawing.Size(355, 29);
             this.txtLogin.TabIndex = 18;
             this.txtLogin.TabStop = false;
+            this.txtLogin.Text = "mishkansk98@mail.ru";
             // 
             // label2
             // 
@@ -145,7 +146,7 @@ namespace MailClient
             this.txtServer.Size = new System.Drawing.Size(213, 29);
             this.txtServer.TabIndex = 15;
             this.txtServer.TabStop = false;
-            this.txtServer.Text = "mail2.nstu.ru";
+            this.txtServer.Text = "smtp.mail.ru";
             // 
             // txtPassword
             // 
@@ -155,6 +156,7 @@ namespace MailClient
             this.txtPassword.Size = new System.Drawing.Size(355, 31);
             this.txtPassword.TabIndex = 14;
             this.txtPassword.TabStop = false;
+            this.txtPassword.Text = "zauce7EhBnd5YgSK4d9b";
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // btnConnectionOpen
@@ -188,7 +190,7 @@ namespace MailClient
             this.txtBody.Size = new System.Drawing.Size(426, 131);
             this.txtBody.TabIndex = 23;
             this.txtBody.TabStop = false;
-            this.txtBody.Text = "Проверка это тело письма";
+            this.txtBody.Text = "<b>Тело тестового письма</b></br>для лабораторной <u>номер <i>5</i></u>.";
             // 
             // label4
             // 
@@ -276,7 +278,7 @@ namespace MailClient
             this.txtSubject.Size = new System.Drawing.Size(339, 29);
             this.txtSubject.TabIndex = 27;
             this.txtSubject.TabStop = false;
-            this.txtSubject.Text = "ТУТ ТЕМА";
+            this.txtSubject.Text = "Тема тестового письма";
             // 
             // txtTo
             // 
@@ -298,7 +300,7 @@ namespace MailClient
             this.groupBox1.Size = new System.Drawing.Size(504, 561);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Отображение лога";
+            this.groupBox1.Text = "Отображение лога SMTP";
             // 
             // txtLog
             // 

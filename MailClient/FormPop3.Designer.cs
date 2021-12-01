@@ -48,6 +48,7 @@ namespace MailClient
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.btnGoToFormSMTP = new System.Windows.Forms.Button();
             this.groupBoxConnect.SuspendLayout();
             this.groupBoxGetMessage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -56,7 +57,6 @@ namespace MailClient
             // 
             // groupBoxConnect
             // 
-            this.groupBoxConnect.Controls.Add(this.btnConnectionClose);
             this.groupBoxConnect.Controls.Add(this.txtPortSmtp);
             this.groupBoxConnect.Controls.Add(this.labelPass);
             this.groupBoxConnect.Controls.Add(this.txtLogin);
@@ -64,13 +64,12 @@ namespace MailClient
             this.groupBoxConnect.Controls.Add(this.label1);
             this.groupBoxConnect.Controls.Add(this.txtServer);
             this.groupBoxConnect.Controls.Add(this.txtPassword);
-            this.groupBoxConnect.Controls.Add(this.btnConnectionOpen);
             this.groupBoxConnect.Controls.Add(this.label3);
             this.groupBoxConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBoxConnect.ForeColor = System.Drawing.Color.Black;
             this.groupBoxConnect.Location = new System.Drawing.Point(12, 12);
             this.groupBoxConnect.Name = "groupBoxConnect";
-            this.groupBoxConnect.Size = new System.Drawing.Size(445, 224);
+            this.groupBoxConnect.Size = new System.Drawing.Size(391, 183);
             this.groupBoxConnect.TabIndex = 0;
             this.groupBoxConnect.TabStop = false;
             this.groupBoxConnect.Text = "Соединение по протоколу POP3";
@@ -79,7 +78,7 @@ namespace MailClient
             // 
             this.btnConnectionClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConnectionClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnConnectionClose.Location = new System.Drawing.Point(16, 186);
+            this.btnConnectionClose.Location = new System.Drawing.Point(12, 201);
             this.btnConnectionClose.Name = "btnConnectionClose";
             this.btnConnectionClose.Size = new System.Drawing.Size(180, 29);
             this.btnConnectionClose.TabIndex = 22;
@@ -91,7 +90,7 @@ namespace MailClient
             // txtPortSmtp
             // 
             this.txtPortSmtp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtPortSmtp.Location = new System.Drawing.Point(330, 25);
+            this.txtPortSmtp.Location = new System.Drawing.Point(306, 23);
             this.txtPortSmtp.Name = "txtPortSmtp";
             this.txtPortSmtp.Size = new System.Drawing.Size(70, 29);
             this.txtPortSmtp.TabIndex = 20;
@@ -101,7 +100,7 @@ namespace MailClient
             // labelPass
             // 
             this.labelPass.AutoSize = true;
-            this.labelPass.Location = new System.Drawing.Point(41, 123);
+            this.labelPass.Location = new System.Drawing.Point(17, 121);
             this.labelPass.Name = "labelPass";
             this.labelPass.Size = new System.Drawing.Size(67, 20);
             this.labelPass.TabIndex = 19;
@@ -110,7 +109,7 @@ namespace MailClient
             // txtLogin
             // 
             this.txtLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtLogin.Location = new System.Drawing.Point(45, 80);
+            this.txtLogin.Location = new System.Drawing.Point(21, 78);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(355, 29);
             this.txtLogin.TabIndex = 18;
@@ -120,7 +119,7 @@ namespace MailClient
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 25);
+            this.label2.Location = new System.Drawing.Point(10, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 20);
             this.label2.TabIndex = 17;
@@ -129,7 +128,7 @@ namespace MailClient
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 57);
+            this.label1.Location = new System.Drawing.Point(20, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 16;
@@ -138,7 +137,7 @@ namespace MailClient
             // txtServer
             // 
             this.txtServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtServer.Location = new System.Drawing.Point(105, 25);
+            this.txtServer.Location = new System.Drawing.Point(81, 23);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(213, 29);
             this.txtServer.TabIndex = 15;
@@ -148,7 +147,7 @@ namespace MailClient
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtPassword.Location = new System.Drawing.Point(45, 146);
+            this.txtPassword.Location = new System.Drawing.Point(21, 144);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(355, 31);
             this.txtPassword.TabIndex = 14;
@@ -160,9 +159,9 @@ namespace MailClient
             // 
             this.btnConnectionOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConnectionOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnConnectionOpen.Location = new System.Drawing.Point(207, 186);
+            this.btnConnectionOpen.Location = new System.Drawing.Point(198, 201);
             this.btnConnectionOpen.Name = "btnConnectionOpen";
-            this.btnConnectionOpen.Size = new System.Drawing.Size(219, 29);
+            this.btnConnectionOpen.Size = new System.Drawing.Size(205, 29);
             this.btnConnectionOpen.TabIndex = 13;
             this.btnConnectionOpen.TabStop = false;
             this.btnConnectionOpen.Text = "Установить соединение";
@@ -173,7 +172,7 @@ namespace MailClient
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(316, 31);
+            this.label3.Location = new System.Drawing.Point(292, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 20);
             this.label3.TabIndex = 21;
@@ -280,7 +279,7 @@ namespace MailClient
             this.groupBox1.Size = new System.Drawing.Size(504, 329);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Отображение лога";
+            this.groupBox1.Text = "Отображение лога (POP3)";
             // 
             // txtLog
             // 
@@ -293,14 +292,30 @@ namespace MailClient
             this.txtLog.TabStop = false;
             this.txtLog.Text = "";
             // 
+            // btnGoToFormSMTP
+            // 
+            this.btnGoToFormSMTP.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGoToFormSMTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnGoToFormSMTP.Location = new System.Drawing.Point(419, 26);
+            this.btnGoToFormSMTP.Name = "btnGoToFormSMTP";
+            this.btnGoToFormSMTP.Size = new System.Drawing.Size(89, 93);
+            this.btnGoToFormSMTP.TabIndex = 26;
+            this.btnGoToFormSMTP.TabStop = false;
+            this.btnGoToFormSMTP.Text = "Создать\r\nновое\r\nписьмо\r\n(SMTP)";
+            this.btnGoToFormSMTP.UseVisualStyleBackColor = true;
+            this.btnGoToFormSMTP.Click += new System.EventHandler(this.btnGoToFormSMTP_Click);
+            // 
             // FormPop3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1256, 583);
+            this.Controls.Add(this.btnGoToFormSMTP);
+            this.Controls.Add(this.btnConnectionClose);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxGetMessage);
+            this.Controls.Add(this.btnConnectionOpen);
             this.Controls.Add(this.groupBoxConnect);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -343,5 +358,6 @@ namespace MailClient
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDeleteMessage;
+        private System.Windows.Forms.Button btnGoToFormSMTP;
     }
 }

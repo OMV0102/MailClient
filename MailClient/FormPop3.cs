@@ -24,7 +24,7 @@ namespace MailClient
         // при загрузке формы
         private void FormPop3_Load(object sender, EventArgs e)
         {
-            OnEditParameteresConnection(true);
+            OnOffEditParameteresConnection(true);
         }
 
         // кнопка Соединиться
@@ -40,12 +40,12 @@ namespace MailClient
                     pop3.ConnectToServerAndAuthenticate();
                     if (pop3.checkConnectedAndAuthenticated())
                     {
-                        OnEditParameteresConnection(false);
+                        OnOffEditParameteresConnection(false);
                         initDataTable();
-                        btnRefreshList_Click(null, null);
+                        //btnRefreshList_Click(null, null); // как подсоединились, сразу же загрузить список писем
                     }
                     else throw new Exception("Не удалось установить соединение!");
-                    txtLog.Text = pop3.getLogAll();
+                    txtLog.Text = pop3.getLogAllAndReadInFile();
                 }
                 catch (Exception err)
                 {
@@ -59,6 +59,8 @@ namespace MailClient
             else
                 MessageBox.Show("Заполните все поля для установление соединения!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
         }
+        
+        // кнопка обновить список
         private void btnRefreshList_Click(object sender, EventArgs e)
         {
             try
@@ -85,6 +87,7 @@ namespace MailClient
                 {
                     MessageBox.Show("Входящих писем нет!", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
+                txtLog.Text = pop3.getLogAllAndReadInFile();
             }
             catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
         }
@@ -123,12 +126,9 @@ namespace MailClient
             dataGridView1.Columns[3].Width = 300;
         }
 
-        private void OnEditParameteresConnection(bool flag)
+        private void OnOffEditParameteresConnection(bool flag)
         {
-            txtServer.Enabled = flag;
-            txtPortSmtp.Enabled = flag;
-            txtLogin.Enabled = flag;
-            txtPassword.Enabled = flag;
+            groupBoxConnect.Enabled = flag;
             btnConnectionOpen.Visible = flag;
             btnConnectionClose.Visible = !flag;
             groupBoxGetMessage.Enabled = !flag;
@@ -149,11 +149,12 @@ namespace MailClient
                     //dataGridView1.Rows.Clear();
                     SetHtmlDocumentInWebBrowser("<!doctype html><HTML></HTML>");
                     pop3.Disconnect();
+                    txtLog.Text = pop3.getLogAllAndReadInFile();
                 }
                 catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
                 finally
                 {
-                    OnEditParameteresConnection(true);
+                    OnOffEditParameteresConnection(true);
                 }
             }
         }
@@ -190,7 +191,17 @@ namespace MailClient
             {
                 pop3.DeleteMessage(index);
                 btnRefreshList_Click(null, null);
+                //txtLog.Text = pop3.getLogAllAndReadInFile();
             }
+        }
+
+        // Переход на форму SMTP
+        private void btnGoToFormSMTP_Click(object sender, EventArgs e)
+        {
+            FormSmtp form = new FormSmtp();
+            this.Enabled = false;
+            form.ShowDialog(this);
+            this.Enabled = true;
         }
     }
 }

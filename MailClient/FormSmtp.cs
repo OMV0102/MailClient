@@ -41,7 +41,7 @@ namespace MailClient
                         OnEditParameteresConnection(false);
                     }
                     else throw new Exception("Не удалось установить соединение!");
-                    txtLog.Text = smtp.getLogAll();
+                    txtLog.Text = smtp.getLogAllAndReadInFile();
                 }
                 catch (Exception err)
                 {
@@ -57,13 +57,14 @@ namespace MailClient
         {
             if (txtTo.TextLength > 0 && txtSubject.TextLength > 0 && txtBody.TextLength > 0/* && txtFrom.TextLength > 0*/)
             {
-                if (smtp.checkConnectedAndAuthenticated())
+                if (smtp != null && smtp.checkConnectedAndAuthenticated())
                 {
                     try
                     {
                         smtp.SendMessage(txtFrom.Text, txtTo.Text, txtSubject.Text, txtBody.Text);
                         txtLog.Text = smtp.getLogAll();
                         MessageBox.Show("Письмо успешно отправлено.", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        txtLog.Text = smtp.getLogAllAndReadInFile();
                     }
                     catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
                 }
@@ -93,6 +94,7 @@ namespace MailClient
                 try
                 {
                     smtp.Disconnect();
+                    txtLog.Text = smtp.getLogAllAndReadInFile();
                 }
                 catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
                 finally

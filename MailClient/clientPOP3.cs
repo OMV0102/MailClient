@@ -15,7 +15,6 @@ namespace MailClient
 
         private MemoryStream streamLogger;
         private MailKit.ProtocolLogger logger;
-        private long StreamPositionStart = 0;
         
         private string server;
         private int port;
@@ -82,18 +81,18 @@ namespace MailClient
         public string getLogAll()
         {
             int offset = 0; // смещение от начального положения
-            StreamPositionStart = logger.Stream.Position;
+            long StreamPositionCurrent = logger.Stream.Position;
             logger.Stream.Position = 0;
             byte[] bytes = new byte[streamLogger.Length];
             streamLogger.Read(bytes, offset, int.Parse(streamLogger.Length.ToString()) - offset);
-            logger.Stream.Position = StreamPositionStart;
+            logger.Stream.Position = StreamPositionCurrent;
             string strLog = Encoding.UTF8.GetString(bytes);
             return strLog;
         }
 
-        public string getLogAllAndReadInFile(string path)
+        public string getLogAllAndReadInFile(string path = "")
         {
-            if (path == "") path = "MailLog_" + DateTime.Now.ToString();
+            if (path == "") path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\Log_POP3.txt";
             string log = getLogAll();
             File.WriteAllText(path, log, Encoding.UTF8);
             return log;
