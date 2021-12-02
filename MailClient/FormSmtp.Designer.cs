@@ -230,6 +230,7 @@ namespace MailClient
             // 
             // txtFrom
             // 
+            this.txtFrom.Enabled = false;
             this.txtFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtFrom.Location = new System.Drawing.Point(63, 25);
             this.txtFrom.Name = "txtFrom";
@@ -288,7 +289,7 @@ namespace MailClient
             this.txtTo.Size = new System.Drawing.Size(339, 29);
             this.txtTo.TabIndex = 26;
             this.txtTo.TabStop = false;
-            this.txtTo.Text = "m.orlov@corp.nstu.ru";
+            this.txtTo.Text = "mishkansk98@mail.ru";
             // 
             // groupBox1
             // 

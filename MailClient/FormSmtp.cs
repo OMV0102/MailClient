@@ -22,7 +22,7 @@ namespace MailClient
         // при загрузке формы
         private void FormSmtp_Load(object sender, EventArgs e)
         {
-            OnEditParameteresConnection(true);
+            OnOffEditParameteresConnection(true);
         }
 
         // кнопка Соединиться
@@ -38,7 +38,7 @@ namespace MailClient
                     if (smtp.checkConnectedAndAuthenticated())
                     {
                         txtFrom.Text = txtLogin.Text;
-                        OnEditParameteresConnection(false);
+                        OnOffEditParameteresConnection(false);
                     }
                     else throw new Exception("Не удалось установить соединение!");
                     txtLog.Text = smtp.getLogAllAndReadInFile();
@@ -75,7 +75,7 @@ namespace MailClient
                 MessageBox.Show("Заполните все поля письма!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         }
 
-        private void OnEditParameteresConnection(bool flag)
+        private void OnOffEditParameteresConnection(bool flag)
         {
             txtServer.Enabled = flag;
             txtPortSmtp.Enabled = flag;
@@ -83,7 +83,7 @@ namespace MailClient
             txtPassword.Enabled = flag;
             btnConnectionOpen.Visible = flag;
             btnConnectionClose.Visible = !flag;
-            txtFrom.Enabled = flag;
+            groupBoxSend.Enabled = !flag;
         }
 
         // кнопка Закрыть соединение
@@ -95,11 +95,12 @@ namespace MailClient
                 {
                     smtp.Disconnect();
                     txtLog.Text = smtp.getLogAllAndReadInFile();
+                    txtFrom.Text = string.Empty;
                 }
                 catch (Exception err) { MessageBox.Show(err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
                 finally
                 {
-                    OnEditParameteresConnection(true);
+                    OnOffEditParameteresConnection(true);
                 }
             }
         }
